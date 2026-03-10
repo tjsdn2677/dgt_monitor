@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-import subprocess
+from dgt_fetch import get_ships
 
 app = Flask(__name__)
 
@@ -8,17 +8,7 @@ def home():
 
     try:
 
-        result = subprocess.check_output(
-            ["python3", "dgt_fetch.py"]
-        ).decode("utf-8")
-
-        lines = result.split("\n")
-
-        ships = []
-
-        for line in lines:
-            if "|" in line:
-                ships.append(line)
+        ships = get_ships()
 
         return render_template("index.html", ships=ships)
 

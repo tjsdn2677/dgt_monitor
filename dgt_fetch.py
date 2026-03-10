@@ -1,13 +1,13 @@
 import requests
 import re
 
-url = "https://info.dgtbusan.com/DGT/esvc/vessel/berthScheduleG"
+def get_ships():
 
-headers = {
-    "User-Agent": "Mozilla/5.0"
-}
+    url = "https://info.dgtbusan.com/DGT/esvc/vessel/berthScheduleG"
 
-try:
+    headers = {
+        "User-Agent": "Mozilla/5.0"
+    }
 
     r = requests.get(url, headers=headers, timeout=10)
 
@@ -15,18 +15,15 @@ try:
 
     ships = re.findall(r'[A-Z]{3,5}[0-9]{3}', html)
 
-    berths = ["B1", "B2", "B3", "B4"]
+    berths = ["B1","B2","B3","B4"]
 
-    for i, b in enumerate(berths):
+    result = []
+
+    for i,b in enumerate(berths):
 
         if i < len(ships):
-
-            print(f"{b} | {ships[i]}")
-
+            result.append(f"{b} | {ships[i]}")
         else:
+            result.append(f"{b} | 대기중")
 
-            print(f"{b} | 대기중")
-
-except Exception as e:
-
-    print("ERROR:", e)
+    return result
