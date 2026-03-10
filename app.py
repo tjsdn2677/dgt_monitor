@@ -10,7 +10,7 @@ def home():
 
         result = subprocess.check_output(
             ["python", "dgt_fetch.py"]
-        ).decode("cp949")
+        ).decode("utf-8")
 
         lines = result.split("\n")
 
