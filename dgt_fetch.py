@@ -13,13 +13,13 @@ def get_ships():
 
     html = r.text
 
-    ships = re.findall(r'[A-Z]{3,5}[0-9]{3}', html)
-
-    berths = ["B1","B2","B3","B4"]
+    ships = re.findall(r'[A-Z]{4}\d{3}', html)
 
     result = []
 
-    for i,b in enumerate(berths):
+    berths = ["B1","B2","B3","B4"]
+
+    for i, b in enumerate(berths):
 
         if i < len(ships):
             result.append(f"{b} | {ships[i]}")
