@@ -9,7 +9,7 @@ def home():
     try:
 
         result = subprocess.check_output(
-            ["python","dgt_fetch.py"]
+            ["python", "dgt_fetch.py"]
         ).decode("cp949")
 
         lines = result.split("\n")
@@ -20,7 +20,7 @@ def home():
             if "|" in line:
                 ships.append(line)
 
-        return render_template("index.html",ships=ships)
+        return render_template("index.html", ships=ships)
 
     except Exception as e:
 
